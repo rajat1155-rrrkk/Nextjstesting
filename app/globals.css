@@ -4,12 +4,29 @@
 
 :root {
   color-scheme: light;
+  --bg-1: #fff8ed;
+  --bg-2: #ffd7a8;
+  --bg-3: #ff8f5a;
+  --ink: #1f1633;
+}
+
+html {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 28%),
+    radial-gradient(circle at 80% 20%, rgba(255, 247, 237, 0.8), transparent 24%),
+    linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 48%, var(--bg-3) 100%);
 }
 
 body {
-  @apply min-h-screen bg-slate-100 text-slate-900;
+  @apply min-h-screen text-slate-900;
+  background: transparent;
+  color: var(--ink);
 }
 
 textarea {
   resize: vertical;
+}
+
+::selection {
+  background: rgba(255, 143, 90, 0.25);
 }

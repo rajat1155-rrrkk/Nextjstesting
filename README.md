@@ -1,6 +1,6 @@
 # Nextjstesting
 
-Minimal 1-page Next.js 14 app built with the App Router, TypeScript, and Tailwind CSS. It checks whether submitted code includes `name`, `price`, `description`, and `map(` using client-side string matching only.
+Minimal 1-page Next.js 14 app built with the App Router, TypeScript, and Tailwind CSS. The UI uses a "vibe coding" visual direction while the checker logic stays fully client-side and verifies whether submitted code includes `name`, `price`, `description`, and `map(`.
 
 ## Run locally
 
