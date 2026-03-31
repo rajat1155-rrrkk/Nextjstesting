@@ -1,5 +1,6 @@
 "use client";
 
+import Editor from "@monaco-editor/react";
 import { useState } from "react";
 
 const taskText =
@@ -28,8 +29,30 @@ products.map((product) => (
   </article>
 ));`;
 
+const starterSnippet = `const products = [
+  {
+    name: "Sunset Speaker",
+    price: 149,
+    description: "Warm audio for late-night build sessions",
+  },
+];
+
+export default function ProductList() {
+  return (
+    <section>
+      {products.map((product) => (
+        <article key={product.name}>
+          <h2>{product.name}</h2>
+          <p>\${product.price}</p>
+          <p>{product.description}</p>
+        </article>
+      ))}
+    </section>
+  );
+}`;
+
 export default function HomePage() {
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState(starterSnippet);
   const [missingParts, setMissingParts] = useState<string[]>([]);
   const [hasRun, setHasRun] = useState(false);
 
@@ -97,25 +120,59 @@ export default function HomePage() {
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="space-y-4 rounded-[1.5rem] border border-slate-200/70 bg-white/85 p-5 shadow-sm">
-            <label className="block">
-              <span className="mb-2 block text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
-                Paste your code
+            <div className="flex items-center justify-between gap-3">
+              <span className="block text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+                Monaco editor
               </span>
-              <textarea
-                value={code}
-                onChange={(event) => setCode(event.target.value)}
-                placeholder="Write or paste your solution here..."
-                className="min-h-[260px] w-full rounded-[1.25rem] border border-slate-300 bg-white px-4 py-3 font-mono text-sm text-slate-900 outline-none transition focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
-              />
-            </label>
+              <button
+                type="button"
+                onClick={() => {
+                  setCode(starterSnippet);
+                  setHasRun(false);
+                  setMissingParts([]);
+                }}
+                className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-600 transition hover:border-orange-300 hover:text-orange-700"
+              >
+                Reset Sample
+              </button>
+            </div>
 
-            <button
-              type="button"
-              onClick={runTest}
-              className="inline-flex items-center justify-center rounded-[1.25rem] bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-300"
-            >
-              Run Vibe Test
-            </button>
+            <div className="overflow-hidden rounded-[1.25rem] border border-slate-300 bg-[#201728] shadow-inner">
+              <Editor
+                height="360px"
+                defaultLanguage="typescript"
+                theme="vs-dark"
+                value={code}
+                onChange={(value) => setCode(value ?? "")}
+                options={{
+                  minimap: { enabled: false },
+                  fontSize: 14,
+                  wordWrap: "on",
+                  scrollBeyondLastLine: false,
+                  automaticLayout: true,
+                  padding: { top: 16, bottom: 16 },
+                  tabSize: 2,
+                }}
+                loading={
+                  <div className="flex h-[360px] items-center justify-center text-sm text-orange-100">
+                    Loading editor...
+                  </div>
+                }
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={runTest}
+                className="inline-flex items-center justify-center rounded-[1.25rem] bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              >
+                Run Vibe Test
+              </button>
+              <div className="inline-flex items-center rounded-[1.25rem] bg-orange-50 px-4 py-3 text-sm text-orange-800">
+                Client-side only. No API, no backend, no database.
+              </div>
+            </div>
           </div>
 
           <div className="rounded-[1.5rem] border border-dashed border-slate-300 bg-white/70 p-5 shadow-sm">
