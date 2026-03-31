@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Vibe Coding Checker",
-  description: "A minimal vibe-coded Next.js 14 task checker with client-side feedback only.",
+  title: "Code Checker",
+  description: "A polished Next.js 14 coding task checker with Monaco editor and client-side validation.",
 };
 
 export default function RootLayout({

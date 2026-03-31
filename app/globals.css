@@ -3,30 +3,28 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
-  --bg-1: #fff8ed;
-  --bg-2: #ffd7a8;
-  --bg-3: #ff8f5a;
-  --ink: #1f1633;
+  color-scheme: dark;
+  --bg-1: #020617;
+  --bg-2: #0f172a;
+  --bg-3: #111827;
+  --glow-1: rgba(34, 211, 238, 0.12);
+  --glow-2: rgba(59, 130, 246, 0.1);
+  --ink: #e2e8f0;
 }
 
 html {
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 28%),
-    radial-gradient(circle at 80% 20%, rgba(255, 247, 237, 0.8), transparent 24%),
-    linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 48%, var(--bg-3) 100%);
+    radial-gradient(circle at top left, var(--glow-1), transparent 24%),
+    radial-gradient(circle at 80% 10%, var(--glow-2), transparent 28%),
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 45%, var(--bg-3) 100%);
 }
 
 body {
-  @apply min-h-screen text-slate-900;
+  @apply min-h-screen text-slate-100 antialiased;
   background: transparent;
   color: var(--ink);
 }
 
-textarea {
-  resize: vertical;
-}
-
 ::selection {
-  background: rgba(255, 143, 90, 0.25);
+  background: rgba(34, 211, 238, 0.24);
 }
